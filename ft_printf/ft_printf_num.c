@@ -6,7 +6,7 @@
 /*   By: onigiz <onigiz@student.42istanbul.com.tr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 16:23:39 by onigiz            #+#    #+#             */
-/*   Updated: 2023/03/27 13:09:45 by onigiz           ###   ########.fr       */
+/*   Updated: 2023/08/01 14:39:37 by onigiz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
@@ -49,7 +49,7 @@ int	ft_point_print(unsigned long n, char *hex)
 	i += ft_putchar(hex[(n % 16)]);
 	return (i);
 }
- 
+
 int	pointer(unsigned long n, char *hex)
 {
 	int	i;
