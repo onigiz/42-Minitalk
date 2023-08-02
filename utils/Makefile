@@ -13,7 +13,8 @@
 list=ft_printf.c \
 		ft_printf_num.c \
 		ft_printf_others.c \
-		ft_printf_utils.c
+		ft_printf_utils.c \
+		ft_atoi.c
 
 OBJS = $(list:.c=.o)
 

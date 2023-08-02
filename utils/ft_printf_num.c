@@ -1,60 +1,62 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_utils.c                                  :+:      :+:    :+:   */
+/*   ft_printf_num.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: onigiz <onigiz@student.42istanbul.com.tr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/15 16:29:50 by onigiz            #+#    #+#             */
-/*   Updated: 2023/08/01 14:39:06 by onigiz           ###   ########.fr       */
+/*   Created: 2023/03/15 16:23:39 by onigiz            #+#    #+#             */
+/*   Updated: 2023/03/27 13:09:45 by onigiz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "ft_printf.h"
 
-int	ft_putchar(char c)
-{
-	write(1, &c, 1);
-	return (1);
-}
-
-int	ft_putstr(char *str)
+int	putnbr(int n)
 {
 	int	i;
 
 	i = 0;
-	while (str[i])
+	if (n == -2147483648)
 	{
-		write(1, &str[i], 1);
-		i++;
+		i += ft_putchar('-');
+		i += ft_putchar('2');
+		n = 147483648;
+	}
+	if (n < 0)
+	{
+		i += ft_putchar('-');
+		n *= -1;
+	}
+	if (n >= 10)
+	{
+		i += putnbr(n / 10);
+		i += putnbr(n % 10);
+	}
+	else
+	{
+		i += ft_putchar(48 + n);
 	}
 	return (i);
 }
 
-int	ft_print_str(char *str)
+int	ft_point_print(unsigned long n, char *hex)
 {
 	int	i;
 
 	i = 0;
-	if (str == NULL)
-	{
-		ft_putstr("(null)");
-		return (6);
-	}
-	while (str[i])
-	{
-		write(1, &str[i], 1);
-		i++;
-	}
+	if (n >= 16)
+		i += ft_point_print((n / 16), hex);
+	i += ft_putchar(hex[(n % 16)]);
 	return (i);
 }
 
-int	ft_strlen(const char *s)
+int	pointer(unsigned long n, char *hex)
 {
 	int	i;
 
-	i = 0;
-	while (s[i] != '\0')
-		i++;
+	i = 2;
+	ft_putchar('0');
+	ft_putchar('x');
+	i += ft_point_print(n, hex);
 	return (i);
 }

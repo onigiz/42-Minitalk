@@ -10,56 +10,26 @@
 #                                                                              #
 # **************************************************************************** #
 
-SERVER_SRCS = server.c 
-CLIENT_SRCS = client.c
-SERVER_BONUS_SRCS = server_bonus.c 
-CLIENT_BONUS_SRCS = client_bonus.c
-FT_PRINTF = ft_printf/libftprintf.a
-LIBFT = libft/libft.a
-NAME = server_client
+NAME1	= server
 
-SERVER_OBJS = $(SERVER_SRCS:.c=.o)
-CLIENT_OBJS = $(CLIENT_SRCS:.c=.o)
-SERVER_BONUS_OBJS = $(SERVER_BONUS_SRCS:.c=.o)
-CLIENT_BONUS_OBJS = $(CLIENT_BONUS_SRCS:.c=.o)
+NAME2	= client
 
-$(NAME): all
+SRC		= server.c client.c
 
-all: server client
+OBJ		= $(SRC:.c=.o)
 
-server: $(SERVER_OBJS) $(FT_PRINTF) $(LIBFT)
-	gcc -o server $(SERVER_OBJS) $(FT_PRINTF) $(LIBFT)
+all : $(OBJ)
+	@make -C ./utils
+	@gcc -Wall -Wextra -Werror server.c ./utils/libftprintf.a -o $(NAME1)
+	@gcc -Wall -Wextra -Werror client.c ./utils/libftprintf.a -o $(NAME2)
 
-client: $(CLIENT_OBJS) $(FT_PRINTF) $(LIBFT)
-	gcc -o client $(CLIENT_OBJS) $(FT_PRINTF) $(LIBFT)
+clean :
+	@make clean -C ./utils
+	@rm -rf client.o server.o
 
-$(FT_PRINTF):
-	make -C ft_printf
+fclean : clean
+	@make fclean -C ./utils
+	@rm -rf $(NAME1) $(NAME2)
 
-$(LIBFT):
-	make -C libft
-
-bonus: server_bonus client_bonus
-
-server_bonus: $(SERVER_BONUS_OBJS) $(FT_PRINTF) $(LIBFT)
-	gcc -o server_bonus $(SERVER_BONUS_OBJS) $(FT_PRINTF) $(LIBFT)
-
-client_bonus: $(CLIENT_BONUS_OBJS) $(FT_PRINTF) $(LIBFT)
-	gcc -o client_bonus $(CLIENT_BONUS_OBJS) $(FT_PRINTF) $(LIBFT)
-
-clean:
-	rm -rf *.o
-	make -C libft clean
-	make -C ft_printf clean
-
-fclean: clean
-	rm -rf server
-	rm -rf client
-	rm -rf server_bonus
-	rm -rf client_bonus
-	make -C libft fclean
-	make -C ft_printf fclean
-
-re: fclean all
-
-.PHONY: all clean fclean re bonus
+re : fclean all
+.PHONY: clean fclean all re
