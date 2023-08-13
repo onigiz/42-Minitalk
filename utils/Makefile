@@ -6,7 +6,7 @@
 #    By: onigiz <onigiz@student.42istanbul.com.tr>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/15 16:16:02 by onigiz            #+#    #+#              #
-#    Updated: 2023/03/15 16:16:17 by onigiz           ###   ########.fr        #
+#    Updated: 2023/08/13 11:48:52 by onigiz           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ OBJS = $(list:.c=.o)
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-NAME = libftprintf.a
+NAME = utils.a
 
 all:		${NAME}
 
