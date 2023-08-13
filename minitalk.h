@@ -2,6 +2,6 @@
 # define MINITALK_H
 
 # include <signal.h>
-# include "utils/ft_printf.h"
+# include "utils/utils.h"
 
 #endif
