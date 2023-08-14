@@ -12,21 +12,26 @@
 
 #include "minitalk.h"
 
-void	usr_signal(int signal)
+void usr_signal(int signal)
 {
-	static int	i = 0;
-	static int	c = 0;
+    static int i = 0;
+    static int c = 0;
 
-	c <<= 1;
-	c += (signal == SIGUSR1);
-	i++;
-	if (i == 8)
-	{
-		ft_printf("%c", c);
-		c = 0;
-		i = 0;
-	}
+    if (i < 7) 
+    {
+        c <<= 1;
+        c += (signal == SIGUSR1);
+        i++;
+
+        if (i == 7)
+        {
+            ft_printf("%c", c);
+            c = 0;
+            i = 0;
+        }
+    }
 }
+
 
 int	main(void)
 {

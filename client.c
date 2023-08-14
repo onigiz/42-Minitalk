@@ -14,22 +14,23 @@
 
 char	g_char;
 
-void	send_char(int pid)
+void send_char(int pid)
 {
-	int	i;
+    int i;
 
-	i = 0;
-	while (i < 8)
-	{
-		if ((128 & g_char) == 128)
-			kill(pid, SIGUSR1);
-		else
-			kill(pid, SIGUSR2);
-		g_char <<= 1;
-		i++;
-		usleep(50);
-	}
+    i = 0;
+    while (i < 7)  // İlk 7 biti gönder
+    {
+        if ((64 & g_char) == 64)  // 64 = 0b01000000
+            kill(pid, SIGUSR1);
+        else
+            kill(pid, SIGUSR2);
+        g_char <<= 1;
+        i++;
+        usleep(50);
+    }
 }
+
 
 void	send_message(char *str, int pid)
 {
