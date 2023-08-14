@@ -6,7 +6,7 @@
 /*   By: onigiz <onigiz@student.42istanbul.com.tr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 02:30:42 by onigiz            #+#    #+#             */
-/*   Updated: 2023/08/14 02:30:44 by onigiz           ###   ########.fr       */
+/*   Updated: 2023/08/15 01:44:10 by onigiz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,22 @@
 
 char	g_char;
 
-void send_char(int pid)
+void	send_char(int pid)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (i < 8)
-    {
-        if ((128 & g_char) == 128)
-            kill(pid, SIGUSR1);
-        else
-            kill(pid, SIGUSR2);
-        g_char <<= 1;
-        i++;
-        usleep(50);
-    }
+	i = 0;
+	while (i < 8)
+	{
+		if ((128 & g_char) == 128)
+			kill(pid, SIGUSR1);
+		else
+			kill(pid, SIGUSR2);
+		g_char <<= 1;
+		i++;
+		usleep(50);
+	}
 }
-
 
 void	send_message(char *str, int pid)
 {
