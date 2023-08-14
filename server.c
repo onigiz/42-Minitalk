@@ -17,13 +17,13 @@ void usr_signal(int signal)
     static int i = 0;
     static int c = 0;
 
-    if (i < 7) 
+    if (i < 8) 
     {
         c <<= 1;
         c += (signal == SIGUSR1);
         i++;
 
-        if (i == 7)
+        if (i == 8)
         {
             ft_printf("%c", c);
             c = 0;

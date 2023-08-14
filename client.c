@@ -19,9 +19,9 @@ void send_char(int pid)
     int i;
 
     i = 0;
-    while (i < 7)  // İlk 7 biti gönder
+    while (i < 8)
     {
-        if ((64 & g_char) == 64)  // 64 = 0b01000000
+        if ((128 & g_char) == 128)
             kill(pid, SIGUSR1);
         else
             kill(pid, SIGUSR2);
