@@ -12,20 +12,20 @@
 
 #include "minitalk.h"
 
-void	usr_signal(int signal)
+void	usr_signal(int signal)//Signal fonksiyonu nasıl çalışıyor?
 {
-	static int	i;
+	static int	i;//Bit seviyesinde işlem olduğundan yer tayini ve update için static olması gerekli
 	static int	c;
 
 	if (i < 8)
 	{
 		c <<= 1;
-		c += (signal == SIGUSR1);
+		c += (signal == SIGUSR1);//Eşitse 1, değilse 0 eklemesi
 		i++;
 		if (i == 8)
 		{
 			ft_printf("%c", c);
-			c = 0;
+			c = 0;//0'a eşitleniyorlar çünkü artık yeni karaktere geçilecek
 			i = 0;
 		}
 	}

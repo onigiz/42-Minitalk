@@ -19,15 +19,15 @@ void	send_char(int pid)
 	int	i;
 
 	i = 0;
-	while (i < 8)
+	while (i < 8)//Bit seviyesinde kontrol yapılıyor
 	{
 		if ((128 & g_char) == 128)
-			kill(pid, SIGUSR1);
+			kill(pid, SIGUSR1);//pid processine SIGUSR1 sinyali yolluyor, bit = 1
 		else
-			kill(pid, SIGUSR2);
+			kill(pid, SIGUSR2);//pid processine SIGUSR2 sinyali yolluyor, bit = 0
 		g_char <<= 1;
 		i++;
-		usleep(50);
+		usleep(50);//sinyal aktarımında karışıklığa önlem
 	}
 }
 
