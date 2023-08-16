@@ -13,6 +13,18 @@
 #include "minitalk.h"
 
 char	g_char;
+//Global değişken kullanmak yerine send char 
+//fonksiyonuna "char ch" türünde bir parametre
+//ekleyerek de işlem yapabiliriz.
+
+void	send_bit(int pid)
+{
+	if ((128 & g_char) == 128)
+		kill(pid, SIGUSR1);//pid processine SIGUSR1 sinyali yolluyor, bit = 1
+	else
+		kill(pid, SIGUSR2);//pid processine SIGUSR2 sinyali yolluyor, bit = 0
+	usleep(50);//sinyal aktarımında karışıklığa önlem
+}
 
 void	send_char(int pid)
 {
@@ -21,13 +33,9 @@ void	send_char(int pid)
 	i = 0;
 	while (i < 8)//Bit seviyesinde kontrol yapılıyor
 	{
-		if ((128 & g_char) == 128)
-			kill(pid, SIGUSR1);//pid processine SIGUSR1 sinyali yolluyor, bit = 1
-		else
-			kill(pid, SIGUSR2);//pid processine SIGUSR2 sinyali yolluyor, bit = 0
+		send_bit(pid);
 		g_char <<= 1;
 		i++;
-		usleep(50);//sinyal aktarımında karışıklığa önlem
 	}
 }
 
