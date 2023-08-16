@@ -22,7 +22,7 @@ void	usr_signal(int signal)//Signal fonksiyonu nasıl çalışıyor?
 		c <<= 1;
 		c += (signal == SIGUSR1);//Eşitse 1, değilse 0 eklemesi
 		i++;
-		if (i == 8)
+		if (i == 8)//Aslında bu noktada mantıken unicode desteğini sağlayamaması gerekiyor ancak işletim sist. / terminal'den dolayı unicode karakter de bastırıyor?
 		{
 			ft_printf("%c", c);
 			c = 0;//0'a eşitleniyorlar çünkü artık yeni karaktere geçilecek
